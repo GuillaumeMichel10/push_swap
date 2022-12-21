@@ -23,6 +23,22 @@ int sorted(dlist_t *l_a)
     return (0);
 }
 
+int sorted_pos(dlist_t *l_a)
+{
+    int nb = -2147483648;
+    dlistnode_t *tmp = l_a->begin;
+
+    while (tmp) {
+        if (nb <= tmp->pos){
+            nb = tmp->pos;
+        } else {
+            return (84);
+        }
+        tmp = tmp->next;
+    }
+    return (0);
+}
+
 int test(pushswap_t *pushswap, int small_nb)
 {
     if (pushswap->l_a->begin->nb < small_nb){
@@ -45,7 +61,6 @@ pushswap_t *sort(pushswap_t *pushswap, int chunk)
             small_nb = test(pushswap, small_nb);
             pushswap->l_a = my_ra(pushswap->l_a);
         }
-        pushswap->nb_moov += 1;
     }
     pushswap->small_nb = small_nb;
     return (pushswap);
@@ -64,34 +79,9 @@ void first_sort(pushswap_t *pushswap)
     while (pushswap->l_b){
         pushswap->l_a = my_pa(pushswap->l_a, pushswap->l_b->begin->nb);
         pushswap->l_b = rm_node(pushswap->l_b);
-        pushswap->nb_moov += 1;
     }
 
     return;
-}
-
-dlist_t *set_pos(pushswap_t *pushswap, dlist_t *l_a)
-{
-    int pos = 1;
-    dlistnode_t *tmp = pushswap->l_a->begin;
-    dlistnode_t *test = l_a->begin;
-
-    while (tmp){
-        tmp->pos = pos;
-        pos += 1;
-        tmp = tmp->next;
-    }
-    tmp = pushswap->l_a->begin;
-    while (pushswap->l_a) {
-        if (pushswap->l_a->begin->nb == test->nb){
-            test->nb = pushswap->l_a->begin->pos;
-            pushswap->l_a = rm_node(pushswap->l_a);
-            test = l_a->begin;
-        } else {
-            test = test->next;
-        }
-    }
-    return (l_a);
 }
 
 //int max_bits = 0;

@@ -29,7 +29,6 @@ typedef struct dlist_s {
 }dlist_t;
 
 typedef struct pushswap_s {
-    int nb_moov;
     int hight_nb;
     int small_nb;
     int total_nb_l_a;
@@ -46,14 +45,12 @@ dlist_t *my_ra(dlist_t *list);
 dlist_t *remp_list(dlist_t *li, int nb);
 dlist_t *my_pa(dlist_t *l_b, int nb);
 dlist_t *my_pb(dlist_t *l_b, int nb);
-void pushswap(int ac, char **av);
-void my_setup(dlist_t *l_a, pushswap_t *pushswap, int ac);
 dlist_t *my_sa(dlist_t *list);
 dlist_t *my_rra(dlist_t *list);
-
 void radix_sort(dlist_t *l_a, dlist_t *l_b, pushswap_t *pushswap);
 dlist_t *final_sort(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int i);
 dlist_t *all_in_l_a(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int x);
 int sorted(dlist_t *l_a);
 dlist_t *set_pos(pushswap_t *pushswap, dlist_t *l_a);
 void first_sort(pushswap_t *pushswap);
+int sorted_pos(dlist_t *l_a);

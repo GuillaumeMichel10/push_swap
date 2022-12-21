@@ -18,7 +18,6 @@ dlist_t *all_in_l_a(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int x)
             ? true : false;
         if (pushswap->sorted == false)
             write (1, " ", 1);
-        pushswap->nb_moov += 1;
     }
     return (l_a);
 }
@@ -34,12 +33,11 @@ dlist_t *final_sort(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int i)
             l_a = my_ra(l_a);
             write(1, "ra ", 3);
         } else {
-            x++;
-            write(1, "pb ", 3);
             l_a = rm_node(l_a);
             l_b = my_pb(l_b, num);
+            write(1, "pb ", 3);
+            x++;
         }
-        pushswap->nb_moov += 1;
     }
     l_a = all_in_l_a(l_a, pushswap, l_b, x);
     return (l_a);
@@ -47,20 +45,7 @@ dlist_t *final_sort(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int i)
 
 void radix_sort(dlist_t *l_a, dlist_t *l_b, pushswap_t *pushswap)
 {
-    pushswap->sorted = (sorted(l_a) == 0) ? true : false;
-    pushswap->nb_moov = 0;
-
     for (int i = 0; pushswap->sorted == false; i++)
         l_a = final_sort(l_a, pushswap, l_b, i);
-
-
-    dlistnode_t *tmp = l_a->begin;
-
-    while(tmp){
-        printf("%d\n",tmp->nb);
-        tmp = tmp->next;
-    }
-
-    printf("moov = %d\n", pushswap->nb_moov);
     return;
 }

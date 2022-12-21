@@ -25,7 +25,6 @@ void my_setup(dlist_t *l_a, pushswap_t *pushswap, int ac)
     pushswap->small_nb = small_nb;
     pushswap->total_nb_l_a = ac - 1;
     pushswap->total_nb_l_b = 0;
-    pushswap->nb_moov = 0;
     return;
 }
 
@@ -40,15 +39,8 @@ void pushswap(int ac, char **av)
     for (int i = ac; i > 1; i--)
         l_a = remp_list(l_a, my_convert_to_nbr(av[i - 1]));
 
-
     my_setup(pushswap->l_a, pushswap, ac);
-    
-    printf("%d\n", pushswap->total_nb_l_a);
-
     first_sort(pushswap);
-
-
-    printf("%d\n", pushswap->nb_moov);
 
     if (pushswap->sorted == true)
         return;
