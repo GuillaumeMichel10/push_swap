@@ -52,10 +52,30 @@ void pushswap(int ac, char **av)
     return;
 }
 
+int error_handling(char **str, int j)
+{
+    for (int i = 0; str[j][i]; i++){
+        if (!(str[j][i] >= '0' && str[j][i] <= '9') && (str[j][i] != '-'))
+            return(1);
+        if (str[j][i] == '-' && i != 0)
+            return(1);
+        if (str[j][i] == '-' && !(str[j][i + 1]))
+            return (1);
+    }
+    return (0);
+}
+
 int main (int ac, char **av)
 {
+    int error = 0;
+
     if (ac == 1)
         return (0);
+    for (int j = 1; av[j]; j++){
+        error = error_handling(av, j);
+        if (error == 1)
+            return (84);
+    }
     if (ac == 2) {
         write (1, "\n", 1);
         return (0);
