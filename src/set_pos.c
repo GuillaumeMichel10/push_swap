@@ -31,7 +31,7 @@ dlist_t *set_pos(pushswap_t *pushswap, dlist_t *l_a)
         tmp = tmp->next;
     }
     while (pushswap->l_a) {
-        if (test->nb == pushswap->l_a->begin->nb){
+        if (test->nb == pushswap->l_a->begin->nb && test->pos == 0){
             test->pos = pushswap->l_a->begin->pos;
             pushswap->l_a = rm_node(pushswap->l_a);
             test = l_a->begin;

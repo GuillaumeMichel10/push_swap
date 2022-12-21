@@ -10,7 +10,7 @@
 dlist_t *all_in_l_a(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int x)
 {
     for (int j = 0; j < x; j++){
-        l_a = my_pa(l_a, l_b->begin->nb);
+        l_a = my_pa(l_a, l_b->begin->nb, l_b->begin->pos);
         write(1, "pa", 2);
         l_b = rm_node(l_b);
         if (j + 1 == x)
@@ -34,7 +34,7 @@ dlist_t *final_sort(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int i)
             write(1, "ra ", 3);
         } else {
             l_a = rm_node(l_a);
-            l_b = my_pb(l_b, num);
+            l_b = my_pb(l_b, num, l_a->begin->pos);
             write(1, "pb ", 3);
             x++;
         }

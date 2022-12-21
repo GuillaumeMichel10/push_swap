@@ -52,8 +52,9 @@ pushswap_t *sort(pushswap_t *pushswap, int chunk)
     int small_nb = 2147483647;
 
     for (int j = 0; j <= pushswap->total_nb_l_a && pushswap->l_a; j++) {
-        if (pushswap->l_a->begin->nb <= chunk){
-            pushswap->l_b = my_pb(pushswap->l_b, pushswap->l_a->begin->nb);
+        if (pushswap->l_a->begin->nb == chunk){
+            pushswap->l_b = my_pb(pushswap->l_b, pushswap->l_a->begin->nb,
+            pushswap->l_a->begin->pos);
             pushswap->l_a = rm_node(pushswap->l_a);
             pushswap->total_nb_l_a -= 1;
             pushswap->total_nb_l_b += 1;
@@ -77,7 +78,8 @@ void first_sort(pushswap_t *pushswap)
         pushswap = sort(pushswap, i);
 
     while (pushswap->l_b){
-        pushswap->l_a = my_pa(pushswap->l_a, pushswap->l_b->begin->nb);
+        pushswap->l_a = my_pa(pushswap->l_a, pushswap->l_b->begin->nb,
+        pushswap->l_b->begin->pos);
         pushswap->l_b = rm_node(pushswap->l_b);
     }
 

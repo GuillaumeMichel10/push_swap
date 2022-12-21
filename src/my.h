@@ -23,7 +23,6 @@ typedef struct dlistnode_s {
 }dlistnode_t;
 
 typedef struct dlist_s {
-    int length;
     struct dlistnode_s *begin;
     struct dlistnode_s *end;
 }dlist_t;
@@ -42,9 +41,9 @@ typedef struct pushswap_s {
 dlist_t *rm_node(dlist_t *li);
 int my_convert_to_nbr(char *str);
 dlist_t *my_ra(dlist_t *list);
-dlist_t *remp_list(dlist_t *li, int nb);
-dlist_t *my_pa(dlist_t *l_b, int nb);
-dlist_t *my_pb(dlist_t *l_b, int nb);
+dlist_t *remp_list(dlist_t *li, int nb, int pos);
+dlist_t *my_pa(dlist_t *l_b, int nb, int pos);
+dlist_t *my_pb(dlist_t *l_b, int nb, int pos);
 dlist_t *my_sa(dlist_t *list);
 dlist_t *my_rra(dlist_t *list);
 void radix_sort(dlist_t *l_a, dlist_t *l_b, pushswap_t *pushswap);

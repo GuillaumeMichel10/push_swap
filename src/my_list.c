@@ -23,23 +23,22 @@ dlist_t *rm_node(dlist_t *li)
     tmp->prev = NULL;
     free(tmp);
     tmp = NULL;
-    li->length--;
     return (li);
 }
 
-dlist_t *remp_list(dlist_t *li, int nb)
+dlist_t *remp_list(dlist_t *li, int nb, int pos)
 {
     dlistnode_t *node = malloc(sizeof(dlistnode_t));
     if (node == NULL)
         return NULL;
     node->nb = nb;
+    node->pos = pos;
     node->next = NULL;
     node->prev = NULL;
     if (!li){
         li = malloc(sizeof(dlist_t));
         if (li == NULL)
             return NULL;
-        li->length = 0;
         li->begin = node;
         li->end = node;
     } else {
@@ -47,6 +46,5 @@ dlist_t *remp_list(dlist_t *li, int nb)
         node->next = li->begin;
         li->begin = node;
     }
-    li->length++;
     return (li);
 }

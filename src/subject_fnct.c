@@ -7,15 +7,15 @@
 
 #include "my.h"
 
-dlist_t *my_pb(dlist_t *l_b, int nb)
+dlist_t *my_pb(dlist_t *l_b, int nb, int pos)
 {
-    l_b = remp_list(l_b, nb);
+    l_b = remp_list(l_b, nb, pos);
     return (l_b);
 }
 
-dlist_t *my_pa(dlist_t *l_a, int nb)
+dlist_t *my_pa(dlist_t *l_a, int nb, int pos)
 {
-    l_a = remp_list(l_a, nb);
+    l_a = remp_list(l_a, nb, pos);
     return (l_a);
 }
 
@@ -49,7 +49,7 @@ dlist_t *my_rra(dlist_t *list)
         return (list);
 
     prev = list->end->prev;
-    list = remp_list(list, list->end->nb);
+    list = remp_list(list, list->end->nb, list->end->pos);
     free(list->end);
     list->end = prev;
     list->end->next = NULL;
