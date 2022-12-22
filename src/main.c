@@ -20,6 +20,7 @@ void my_setup(dlist_t *l_a, pushswap_t *pushswap, int ac)
             small_nb = tmp->nb;
         tmp = tmp->next;
     }
+
     pushswap->total_nb = ac - 1;
     pushswap->hight_nb = hight_nb;
     pushswap->small_nb = small_nb;
@@ -39,15 +40,16 @@ void pushswap(int ac, char **av)
 
     pushswap->sorted = (sorted(l_a) == 0) ? true : false;
 
-    if (pushswap->sorted == true)
+    if (pushswap->sorted == true){
+        write(1, "\n", 1);
         return;
+    }
 
     first_sort(ac, av, pushswap);
     my_setup(pushswap->l_a, pushswap, ac);
     l_a = set_pos(pushswap, l_a);
     radix_sort(l_a, l_b, pushswap);
     write(1, "\n", 1);
-
     return;
 }
 
@@ -70,16 +72,18 @@ int main (int ac, char **av)
 
     if (ac == 1)
         return (0);
+
     for (int j = 1; av[j]; j++){
         error = error_handling(av, j);
         if (error == 1)
             return (84);
     }
+
     if (ac == 2) {
         write (1, "\n", 1);
         return (0);
     }
-    pushswap(ac, av);
 
+    pushswap(ac, av);
     return (0);
 }

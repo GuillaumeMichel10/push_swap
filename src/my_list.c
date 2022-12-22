@@ -39,7 +39,6 @@ dlist_t *remp_list(dlist_t *li, int nb)
         li = malloc(sizeof(dlist_t));
         if (li == NULL)
             return NULL;
-        li->length = 0;
         li->begin = node;
         li->end = node;
     } else {
@@ -47,6 +46,5 @@ dlist_t *remp_list(dlist_t *li, int nb)
         node->next = li->begin;
         li->begin = node;
     }
-    li->length++;
     return (li);
 }

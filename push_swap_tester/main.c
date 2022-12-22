@@ -23,20 +23,9 @@ int sorted(dlist_t *l_a)
     return (0);
 }
 
-int main (int ac, char **av)
+dlist_t *sort(char **av, dlist_t *l_a)
 {
-    dlist_t *l_a = malloc(sizeof(dlist_t));
-    dlist_t *l_b = malloc(sizeof(dlist_t));
-    l_a = NULL;
-    l_b = NULL;
-
-    for (int i = ac; i > 1; i--){
-        if (av[i - 1][0] == 'r' || av[i - 1][0] == 'p')
-            break;
-        l_a = remp_list(l_a, my_convert_to_nbr(av[i - 1]));
-    }
-
-    dlistnode_t *tmp = l_a->begin;
+    dlist_t *l_b = NULL;
 
     for (int i = 0; av[i]; i++){
         if (my_strcmp(av[i], "pa") == 0){
@@ -51,11 +40,32 @@ int main (int ac, char **av)
             l_a = my_ra(l_a);
         }
     }
-    tmp = l_a->begin;
+    return (l_a);
+}
+
+void print_list(dlist_t *l_a)
+{
+    dlistnode_t *tmp = l_a->begin;
+
     while (tmp) {
         printf("%d\n", tmp->nb);
         tmp = tmp->next;
     }
+}
+
+int main (int ac, char **av)
+{
+    dlist_t *l_a = NULL;
+
+    for (int i = ac; i > 1; i--){
+        if (av[i - 1][0] == 'r' || av[i - 1][0] == 'p')
+            break;
+        l_a = remp_list(l_a, my_convert_to_nbr(av[i - 1]));
+    }
+
+    l_a = sort(av, l_a);
+    print_list(l_a);
+
     if (sorted(l_a) == 0){
         printf("Sorted");
     } else {

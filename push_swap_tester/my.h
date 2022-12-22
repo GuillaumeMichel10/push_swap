@@ -20,7 +20,6 @@ typedef struct dlistnode_s {
 }dlistnode_t;
 
 typedef struct dlist_s {
-    int length;
     struct dlistnode_s *begin;
     struct dlistnode_s *end;
 }dlist_t;
