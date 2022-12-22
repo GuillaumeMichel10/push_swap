@@ -23,47 +23,45 @@ int sorted(dlist_t *l_a)
     return (0);
 }
 
-int test(pushswap_t *pushswap, int small_nb)
+place_t test(int *nbrs, int i, place_t place)
 {
-    if (pushswap->l_a->begin->nb < small_nb){
-        small_nb = pushswap->l_a->begin->nb;
+    if (nbrs[i] < place.min){
+        place.place = i;
+        place.min = nbrs[i];
     }
-    return (small_nb);
+    return (place);
 }
 
-pushswap_t *sort(pushswap_t *pushswap, int chunk)
+void sort(int ac, int *nbrs, pushswap_t *pushswap)
 {
-    int small_nb = 2147483647;
+    place_t place;
+    place.min = __INT_MAX__;
+    place.place = 0;
+    int tmp = 0;
 
-    for (int j = 0; j <= pushswap->total_nb_l_a && pushswap->l_a; j++) {
-        if (pushswap->l_a->begin->nb <= chunk){
-            pushswap->l_b = my_pb(pushswap->l_b, pushswap->l_a->begin->nb);
-            pushswap->l_a = rm_node(pushswap->l_a);
-            pushswap->total_nb_l_a -= 1;
-            pushswap->total_nb_l_b += 1;
-        } else {
-            small_nb = test(pushswap, small_nb);
-            pushswap->l_a = my_ra(pushswap->l_a);
+    for (int j = 0; j < ac - 1; j++){
+        for (int i = j; i < ac - 1; i++){
+            place = test(nbrs, i, place);
         }
+        tmp = nbrs[j];
+        nbrs[j] = place.min;
+        nbrs[place.place] = tmp;
+        place.min = __INT_MAX__;
     }
-    pushswap->small_nb = small_nb;
-    return (pushswap);
+
+    for (int i = ac - 1; i > 0; i--)
+        pushswap->l_a = remp_list(pushswap->l_a, nbrs[i - 1]);
 }
 
-void first_sort(pushswap_t *pushswap)
+void first_sort(int ac, char **av, pushswap_t *pushswap)
 {
-    pushswap->sorted = (sorted(pushswap->l_a) == 0) ? true : false;
-    if (pushswap->sorted == true){
-        write(1, "\n", 1);
-        return;
-    }
-    for (int i = pushswap->small_nb; pushswap->l_a; i = pushswap->small_nb)
-        pushswap = sort(pushswap, i);
+    int *nbrs = malloc(sizeof(int) * ac);
 
-    while (pushswap->l_b){
-        pushswap->l_a = my_pa(pushswap->l_a, pushswap->l_b->begin->nb);
-        pushswap->l_b = rm_node(pushswap->l_b);
-    }
+    for (int i = 0; i < ac - 1; i++)
+        nbrs[i] = my_convert_to_nbr(av[i + 1]);
+
+    sort(ac, nbrs, pushswap);
+    free (nbrs);
 
     return;
 }

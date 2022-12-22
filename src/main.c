@@ -35,16 +35,15 @@ void pushswap(int ac, char **av)
     pushswap_t *pushswap = malloc(sizeof(pushswap_t));
 
     for (int i = ac; i > 1; i--)
-        pushswap->l_a = remp_list(pushswap->l_a, my_convert_to_nbr(av[i - 1]));
-    for (int i = ac; i > 1; i--)
         l_a = remp_list(l_a, my_convert_to_nbr(av[i - 1]));
 
-    my_setup(pushswap->l_a, pushswap, ac);
-    first_sort(pushswap);
+    pushswap->sorted = (sorted(l_a) == 0) ? true : false;
 
     if (pushswap->sorted == true)
         return;
 
+    first_sort(ac, av, pushswap);
+    my_setup(pushswap->l_a, pushswap, ac);
     l_a = set_pos(pushswap, l_a);
     radix_sort(l_a, l_b, pushswap);
     write(1, "\n", 1);
@@ -56,9 +55,9 @@ int error_handling(char **str, int j)
 {
     for (int i = 0; str[j][i]; i++){
         if (!(str[j][i] >= '0' && str[j][i] <= '9') && (str[j][i] != '-'))
-            return(1);
+            return (1);
         if (str[j][i] == '-' && i != 0)
-            return(1);
+            return (1);
         if (str[j][i] == '-' && !(str[j][i + 1]))
             return (1);
     }

@@ -28,6 +28,11 @@ typedef struct dlist_s {
     struct dlistnode_s *end;
 }dlist_t;
 
+typedef struct place_s{
+    int min;
+    int place;
+}place_t;
+
 typedef struct pushswap_s {
     int hight_nb;
     int small_nb;
@@ -52,5 +57,4 @@ dlist_t *final_sort(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int i);
 dlist_t *all_in_l_a(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int x);
 int sorted(dlist_t *l_a);
 dlist_t *set_pos(pushswap_t *pushswap, dlist_t *l_a);
-void first_sort(pushswap_t *pushswap);
-int sorted_pos(dlist_t *l_a);
+void first_sort(int ac, char **av, pushswap_t *pushswap);
