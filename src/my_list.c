@@ -23,7 +23,6 @@ dlist_t *rm_node(dlist_t *li)
     tmp->prev = NULL;
     free(tmp);
     tmp = NULL;
-    li->length--;
     return (li);
 }
 

@@ -23,7 +23,6 @@ typedef struct dlistnode_s {
 }dlistnode_t;
 
 typedef struct dlist_s {
-    int length;
     struct dlistnode_s *begin;
     struct dlistnode_s *end;
 }dlist_t;
@@ -58,3 +57,4 @@ dlist_t *all_in_l_a(dlist_t *l_a, pushswap_t *pushswap, dlist_t *l_b, int x);
 int sorted(dlist_t *l_a);
 dlist_t *set_pos(pushswap_t *pushswap, dlist_t *l_a);
 void first_sort(int ac, char **av, pushswap_t *pushswap);
+void first_test(dlist_t *test, pushswap_t *pushswap);

@@ -33,24 +33,24 @@ void pushswap(int ac, char **av)
 {
     dlist_t *l_a = NULL;
     dlist_t *l_b = NULL;
+    dlist_t *test = NULL;
     pushswap_t *pushswap = malloc(sizeof(pushswap_t));
-
-    for (int i = ac; i > 1; i--)
+    for (int i = ac; i > 1; i--){
         l_a = remp_list(l_a, my_convert_to_nbr(av[i - 1]));
-
+        test = remp_list(test, my_convert_to_nbr(av[i - 1]));
+    }
     pushswap->sorted = (sorted(l_a) == 0) ? true : false;
-
+    if (pushswap->sorted == false)
+        first_test(test, pushswap);
     if (pushswap->sorted == true){
         write(1, "\n", 1);
         return;
     }
-
     first_sort(ac, av, pushswap);
     my_setup(pushswap->l_a, pushswap, ac);
     l_a = set_pos(pushswap, l_a);
     radix_sort(l_a, l_b, pushswap);
     write(1, "\n", 1);
-    return;
 }
 
 int error_handling(char **str, int j)
